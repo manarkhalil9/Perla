@@ -1,2 +1,63 @@
-# Perla
-personal planning web app that helps users turn long-term visions into achievable monthly and daily actions. Users are welcomed each day with a motivational quote, manage a to-do list, build a yearly vision board, and track progress through an automatic timeline that updates as goals are completed.
+<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/1ac40d37-bf1a-4d1e-838d-f50edae856a4" /># Perla🦪
+Perla is a personal planning web application designed to help users turn long-term visions into achievable monthly and daily actions in a calm, pearl-inspired environment.
+
+Users are welcomed each day with a random motivational quote, manage a personal to-do list, build a yearly vision board, and track their progress through a dynamic timeline that updates as goals and tasks are completed.
+
+🛠️ Technologies Used
+Backend:
+
+Python
+
+Django
+
+Django Authentication (username & password)
+
+PostgreSQL / SQLite (development)
+
+Frontend:
+
+Django Templates (DTL)
+
+HTML5
+
+CSS3
+
+JavaScript
+
+APIs
+
+Public Quotes API (Random Positive Quotes)
+
+Tools
+
+GitHub
+
+Figma (Wireframes)
+
+SmartDraw (ERD)
+
+Trello (Project Planning)
+
+🧩 Features
+
+User authentication (login & logout)
+
+Daily random positive quote on login
+
+Personal to-do list with full CRUD
+
+Yearly vision board
+
+Vision steps linked to monthly progress
+
+Dynamic timeline showing vision progress
+
+Add vision steps directly to the to-do list
+
+📐 Wireframes
+
+🔗 Wireframe Link:
+
+🗂️ Entity Relationship Diagram (ERD)
+![image](<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/deebae8c-063d-4c7b-9b96-5d5b3203dd9d" />
+)
