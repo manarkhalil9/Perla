@@ -1,0 +1,52 @@
+body {
+    background: #fefcfb;
+    font-family: 'Helvetica', sans-serif;
+    color: #5a4d41;
+}
+
+nav,
+footer.page-footer {
+    background: #f7eae1;
+}
+
+.brand-logo {
+    color: #cfaea5;
+}
+
+footer.page-footer,
+footer.page-footer .right {
+    color: #5a4d41;
+}
+
+main.container {
+    padding-top: 20px;
+}
+
+.about-page {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.about-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-page .intro {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.about-sections {
+  display: grid;
+  gap: 20px;
+}
+
+.about-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}

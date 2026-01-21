@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Your Visions</h1>
+
+{% for vision in visions %}
+  <div class="card">
+    <div class="card-content">
+    <a href="{% url 'vision_detail' vision.id %}">
+  <span class="card-title">{{ vision.name }}</span>
+    </a>
+
+      <p>{{ vision.description }}</p>
+    </div>
+  </div>
+{% endfor %}
+
+{% endblock %}
