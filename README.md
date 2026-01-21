@@ -3,7 +3,7 @@ Perla is a personal planning web application designed to help users turn long-te
 
 Users are welcomed each day with a random motivational quote, manage a personal to-do list, build a yearly vision board, and track their progress through a dynamic timeline that updates as goals and tasks are completed.
 
-🛠️ Technologies Used
+# 🛠️ Technologies Used
 Backend:
 
 Python
@@ -38,7 +38,7 @@ SmartDraw (ERD)
 
 Trello (Project Planning)
 
-🧩 Features
+# 🧩 Features
 
 User authentication (login & logout)
 
@@ -54,9 +54,10 @@ Dynamic timeline showing vision progress
 
 Add vision steps directly to the to-do list
 
-📐 Wireframes
+# 📐 Wireframes
 
 🔗 Wireframe Link:
 
-🗂️ Entity Relationship Diagram (ERD)
+# 🗂️ Entity Relationship Diagram (ERD)
+
 <img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/1ac40d37-bf1a-4d1e-838d-f50edae856a4" />
