@@ -18,15 +18,11 @@ Frontend:
 
 Django Templates (DTL)
 
-HTML5
+HTML
 
-CSS3
-
-JavaScript
+CSS
 
 APIs
-
-Public Quotes API (Random Positive Quotes)
 
 Tools
 
