@@ -1,4 +1,4 @@
-<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/1ac40d37-bf1a-4d1e-838d-f50edae856a4" /># Perla🦪
+# Perla🦪
 Perla is a personal planning web application designed to help users turn long-term visions into achievable monthly and daily actions in a calm, pearl-inspired environment.
 
 Users are welcomed each day with a random motivational quote, manage a personal to-do list, build a yearly vision board, and track their progress through a dynamic timeline that updates as goals and tasks are completed.
@@ -59,5 +59,4 @@ Add vision steps directly to the to-do list
 🔗 Wireframe Link:
 
 🗂️ Entity Relationship Diagram (ERD)
-![image](<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/deebae8c-063d-4c7b-9b96-5d5b3203dd9d" />
-)
+<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/1ac40d37-bf1a-4d1e-838d-f50edae856a4" />
