@@ -1,8 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 
-<h1>{{ vision.name }}</h1>
-<p>{{ vision.description }}</p>
-<p><strong>Target Month:</strong> {{ vision.target_month }}</p>
+{% if vision %}
+  <h1>{{ vision.name }}</h1>
+
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ vision.name }}</span>
+
+      {% load static %}
+      <img src="{% static vision.image|cut:'main_app/static/' %}" alt=''>
+
+      <p>{{ vision.description }}</p>
+
+      <div>
+        <a href="{% url 'vision_update' vision.id %}">Edit</a>
+        <a href="{% url 'vision_delete' vision.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+
+{% else %}
+  <p>Vision not found.</p>
+{% endif %}
+
+<a href="{% url 'task_create' vision.id %}" class="btn">
+  + Add Task
+</a>
 
 {% endblock %}

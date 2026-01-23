@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Add Task for "{{ vision.name }}"</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" class="btn" value="Add Task">
+</form>
+
+<br>
+<a href="{% url 'vision_detail' vision.id %}" class="btn grey">
+  Back to Vision
+</a>
+
+{% endblock %}

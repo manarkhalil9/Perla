@@ -1,18 +1,25 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 
 <h1>Your Visions</h1>
 
 {% for vision in visions %}
   <div class="card">
-    <div class="card-content">
     <a href="{% url 'vision_detail' vision.id %}">
-  <span class="card-title">{{ vision.name }}</span>
-    </a>
+      <div class="card-content">
+        <span class="card-title">{{ vision.name }}</span>
+        <p>{{ vision.description }}</p>
 
-      <p>{{ vision.description }}</p>
-    </div>
+        {% if vision.image %}
+      <img src="{% static vision.image|cut:'main_app/static/' %}" alt=''>
+        {% endif %}
+      </div>
+    </a>
   </div>
+{% empty %}
+  <p>No visions found.</p>
 {% endfor %}
 
 {% endblock %}
