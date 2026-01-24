@@ -4,4 +4,39 @@
 <h1>Welcome to Perla Planner</h1>
 <p>Organize your visions and tasks with calm and elegance.</p>
 
+<hr>
+
+<h4>To-Do List</h4>
+
+<form method="POST" action="{% url 'todo_add' %}">
+  {% csrf_token %}
+  <input type="text" name="title" placeholder="Task title" required>
+  <input type="date" name="date" required>
+  <input type="text" name="priority" placeholder="Priority (low / medium / high)" required>
+  <button class="btn">Add</button>
+</form>
+
+<ul class="collection">
+  {% for todo in todos %}
+    <li class="collection-item">
+      
+      {% if todo.is_done %}
+        <strike>{{ todo.title }}</strike>
+      {% else %}
+        {{ todo.title }}
+      {% endif %}
+
+      <span class="grey-text">
+        ({{ todo.date }} • {{ todo.priority }})
+      </span>
+
+      <a href="{% url 'todo_toggle' todo.id %}">✔</a>
+      <a href="{% url 'todo_delete' todo.id %}" class="red-text">✖</a>
+
+    </li>
+  {% empty %}
+    <li class="collection-item">No tasks yet</li>
+  {% endfor %}
+</ul>
+
 {% endblock %}

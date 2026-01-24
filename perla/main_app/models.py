@@ -40,7 +40,14 @@ class VisionTask(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.get_month_display()})"
-    
-# todo list model
-class ToDoList(models.Model):
-    title
+
+
+# todoItem model
+class TodoItem(models.Model):
+    title = models.CharField(max_length=100)
+    date = models.DateField()
+    priority = models.CharField(max_length=20)
+    is_done = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

@@ -2,16 +2,19 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
-from .models import Vision, VisionTask
+from .models import Vision, VisionTask, TodoItem
 from .forms import VisionTaskForm
 
 # Create your views here.
+# home
 def home(request):
     return render(request, 'home.html')
 
+# about
 def about(request):
     return render(request, 'about.html')
 
+# visions
 def vision_index(request):
     visions = Vision.objects.all()
     return render(request, 'visions/index.html', {'visions': visions})
@@ -38,6 +41,7 @@ class VisionDelete(DeleteView):
     model = Vision
     success_url = '/visions/'
 
+# vision tasks
 def task_create(request, vision_id):
     vision = Vision.objects.get(id=vision_id)
 
@@ -52,8 +56,30 @@ def task_create(request, vision_id):
     else:
         form = VisionTaskForm()
 
-    return render(request, 'tasks/task_form.html', {
-        'form': form,
-        'vision': vision
-    })
+    return render(request, 'tasks/task_form.html', {'form': form, 'vision': vision})
+
+# todo list
+def home(request):
+    todos = TodoItem.objects.all()
+    return render(request, 'home.html', {'todos': todos})
+
+def todo_add(request):
+    if request.method == 'POST':
+        TodoItem.objects.create(
+            title=request.POST['title'],
+            date=request.POST['date'],
+            priority=request.POST['priority']
+        )
+        return redirect('home')
+    
+def todo_toggle(request, todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    todo.is_done = not todo.is_done
+    todo.save()
+    return redirect('home')
+
+def todo_delete(request, todo_id):
+    todo = TodoItem.objects.get(id=todo_id)
+    todo.delete()
+    return redirect('home')
 
