@@ -30,4 +30,20 @@
   + Add Task
 </a>
 
+<h4>Vision Tasks</h4>
+
+<ul class="collection">
+  {% for task in vision.visiontask_set.all %}
+    <li class="collection-item">
+      {{ task.title }} - {{ task.get_month_display }}
+
+      <a href="{% url 'task_update' task.id %}">Edit</a>
+      <a href="{% url 'task_delete' task.id %}" class="red-text">Delete</a>
+    </li>
+  {% empty %}
+    <li class="collection-item">No tasks yet</li>
+  {% endfor %}
+</ul>
+
+
 {% endblock %}

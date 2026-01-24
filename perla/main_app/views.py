@@ -6,9 +6,11 @@ from .models import Vision, VisionTask, TodoItem
 from .forms import VisionTaskForm
 
 # Create your views here.
+
 # home
 def home(request):
-    return render(request, 'home.html')
+    todos = TodoItem.objects.all()
+    return render(request, 'home.html', {'todos': todos})
 
 # about
 def about(request):
@@ -33,10 +35,12 @@ class VisionCreate(CreateView):
     #    form.instance.user = self.request.user
     #    return super().form_valid(form)
 
+# update vision
 class VisionUpdate(UpdateView):
     model = Vision
     fields = ['name', 'description', 'target_month', 'image']
 
+# delete vision
 class VisionDelete(DeleteView):
     model = Vision
     success_url = '/visions/'
@@ -56,13 +60,19 @@ def task_create(request, vision_id):
     else:
         form = VisionTaskForm()
 
-    return render(request, 'tasks/task_form.html', {'form': form, 'vision': vision})
+    return render(request, 'main_app/task_form.html', {'form': form, 'vision': vision})
+
+# update vision task
+class VisionTaskUpdate(UpdateView):
+    model = VisionTask
+    fields = ['title', 'month']
+
+# delete vision task
+class VisionTaskDelete(DeleteView):
+    model = VisionTask
+    success_url = '/visions/'
 
 # todo list
-def home(request):
-    todos = TodoItem.objects.all()
-    return render(request, 'home.html', {'todos': todos})
-
 def todo_add(request):
     if request.method == 'POST':
         TodoItem.objects.create(
@@ -72,12 +82,14 @@ def todo_add(request):
         )
         return redirect('home')
     
+# change status
 def todo_toggle(request, todo_id):
     todo = TodoItem.objects.get(id=todo_id)
     todo.is_done = not todo.is_done
     todo.save()
     return redirect('home')
 
+# delete 
 def todo_delete(request, todo_id):
     todo = TodoItem.objects.get(id=todo_id)
     todo.delete()
