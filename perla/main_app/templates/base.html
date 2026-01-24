@@ -2,27 +2,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perla</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perla Planner</title>
+
+  <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Material Icons (required for burger icon) -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" ></script>
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-<header class="navbar-fixed">
-  <nav>
-    <div class="nav-wrapper">
 
-      <a href="{% url 'home' %}" class="brand-logo">Perla</a>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
 
-      <ul id="nav-mobile" class="right">
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'vision_create' %}">Add a Vision</a></li>
-        <li><a href="{% url 'index' %}">View All Visions</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
+        <!-- Burger Menu -->
+        <a href="#" data-target="mobile" class="sidenav-trigger">
+          <i class="material-icons">menu</i>
+        </a>
+
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="brand-logo">Perla</a>
+
+        <!-- Desktop Menu -->
+        <ul class="right hide-on-med-and-down">
+          <li><a href="{% url 'about' %}">About</a></li>
+
+          {% if user.is_authenticated %}           
+            <li><a href="{% url 'vision_create' %}">Add a Vision</a></li>
+            <li><a href="{% url 'index' %}">View All My Visions</a></li>
+
+            <li>
+              <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-flat">Logout</button>
+              </form>
+            </li>
+            <li>Hello, {{ user.username }}!</li>
+          {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Signup</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Menu -->
+  <ul class="sidenav" id="mobile">
+    <li><a href="{% url 'about' %}">About</a></li>
+
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'index' %}">View All My Visions</a></li>
+      <li><a href="{% url 'vision_create' %}">Add a Vision</a></li>
+      <li>
+        <form method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn-flat">Logout</button>
+        </form>
+      </li>
+    {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'signup' %}">Signup</a></li>
+    {% endif %}
+  </ul>
 
   <main class="container">
     {% block content %}
@@ -32,6 +85,14 @@
   <footer class="page-footer">
     <div class="right">All Rights Reserved, &copy; 2026 Perla Planner &nbsp;</div>
   </footer>
+
+  <!-- Initialize Sidenav -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.sidenav');
+      M.Sidenav.init(elems);
+    });
+  </script>
 
 </body>
 </html>
