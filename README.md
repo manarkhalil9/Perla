@@ -52,7 +52,7 @@ Add vision steps directly to the to-do list
 
 # 📐 Wireframes
 
-🔗 Wireframe Link:
+🔗 Wireframe Link: https://www.figma.com/make/vsbXbh9FiV91vMzwRNdDyQ/Personal-Web-Planner-Wireframe?t=FcWaEzzJe0kzJ93p-1
 
 # 🗂️ Entity Relationship Diagram (ERD)
 
