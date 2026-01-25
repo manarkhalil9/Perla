@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .utils import get_quote
 
 # Create your views here.
 
@@ -15,7 +16,8 @@ from django.contrib.auth import login
 @login_required
 def home(request):
     todos = TodoItem.objects.filter(user=request.user)
-    return render(request, 'home.html', {'todos': todos})
+    quote_data = get_quote
+    return render(request, 'home.html', {'todos': todos, 'quote':quote_data})
 
 # about
 def about(request):
