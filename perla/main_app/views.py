@@ -16,8 +16,9 @@ from .utils import get_quote
 @login_required
 def home(request):
     todos = TodoItem.objects.filter(user=request.user)
+    visions = Vision.objects.filter(user=request.user)
     quote_data = get_quote
-    return render(request, 'home.html', {'todos': todos, 'quote':quote_data})
+    return render(request, 'home.html', {'todos': todos, 'quote':quote_data, 'visions':visions})
 
 # about
 def about(request):
@@ -60,17 +61,17 @@ def task_create(request, vision_id):
 
     if request.method == 'POST':
         form = VisionTaskForm(request.POST)
-
         if form.is_valid():
-            task = form.save(commit=False)
-            task.vision = vision
-            task.save()
-            return redirect('vision_detail', vision_id)
-
+            new_task = form.save(commit=False)
+            new_task.vision = vision
+            new_task.user = request.user
+            new_task.save()
+            return redirect('vision_detail', vision_id=vision_id)
     else:
         form = VisionTaskForm()
 
     return render(request, 'main_app/task_form.html', {'form': form, 'vision': vision})
+
 
 # update vision task
 class VisionTaskUpdate(LoginRequiredMixin, UpdateView):

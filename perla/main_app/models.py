@@ -4,22 +4,6 @@ from datetime import date
 from django.contrib.auth.models import User
 
 # Create your models here.
-
-# vision model
-class Vision(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    target_month = models.IntegerField()
-    image = models.ImageField(upload_to='main_app/static/uploads/', default='')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-    
-    def get_absolute_url(self):
-        return reverse('vision_detail', kwargs={'vision_id': self.id})
-    
-# visions tasks model
 MONTHS = (
     ('JAN', 'January'),
     ('FEB', 'February'),
@@ -35,6 +19,21 @@ MONTHS = (
     ('DEC', 'December'),
 )
 
+# vision model
+class Vision(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(blank=True, null=True)
+    target_month = models.CharField(max_length=3, choices=MONTHS)
+    image = models.ImageField(upload_to='main_app/static/uploads/', default='', blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name} - {self.get_target_month_display()}'
+    
+    def get_absolute_url(self):
+        return reverse('vision_detail', kwargs={'pk': self.id})
+    
+# visions tasks model
 class VisionTask(models.Model):
     title = models.CharField(max_length=100)
     month = models.CharField(max_length=3, choices=MONTHS)
@@ -42,11 +41,10 @@ class VisionTask(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.title} ({self.get_month_display()})"
+        return f'{self.title} - {self.get_month_display()}'
     
     def get_absolute_url(self):
-        return '/visions/'
-
+        return reverse('vision_detail', kwargs={'vision_id': self.vision.id})
 
 # todoItem model
 class TodoItem(models.Model):

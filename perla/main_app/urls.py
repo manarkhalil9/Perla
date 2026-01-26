@@ -14,7 +14,7 @@ urlpatterns = [
     path('visions/<int:pk>/delete/', views.VisionDelete.as_view(), name='vision_delete'),
 
     # full CRUD visiontask URLs
-    path('visions/<int:vision_id>/tasks/new/', views.task_create, name='task_create'),
+    path('visions/<int:vision_id>/add_task/', views.task_create, name='task_create'),
     path('tasks/<int:pk>/update/', views.VisionTaskUpdate.as_view(), name='task_update'),
     path('tasks/<int:pk>/delete/', views.VisionTaskDelete.as_view(), name='task_delete'),
 

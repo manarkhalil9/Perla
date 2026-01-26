@@ -9,4 +9,12 @@
   <input type="submit" class="btn" value="Save">
 </form>
 
+<!-- Materialize select init -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
+
 {% endblock %}

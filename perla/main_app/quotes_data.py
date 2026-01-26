@@ -1,7 +1,6 @@
-# quotes_data.py
+# main_app/quotes_data.py
 
 POSITIVE_QUOTES = [
-    # --- PRODUCTIVITY & ACTION ---
     {"text": "Action is the foundational key to all success.", "author": "Pablo Picasso"},
     {"text": "Amateurs sit and wait for inspiration, the rest of us just get up and go to work.", "author": "Stephen King"},
     {"text": "You don't have to be great to start, but you have to start to be great.", "author": "Zig Ziglar"},
@@ -32,8 +31,6 @@ POSITIVE_QUOTES = [
     {"text": "The key is not to prioritize what's on your schedule, but to schedule your priorities.", "author": "Stephen Covey"},
     {"text": "If you want to make an easy job seem mighty hard, just keep putting it off.", "author": "Olin Miller"},
     {"text": "Ordinary people think merely of spending time, great people think of using it.", "author": "Arthur Schopenhauer"},
-    
-    # --- VISION & AMBITION ---
     {"text": "The future belongs to those who believe in the beauty of their dreams.", "author": "Eleanor Roosevelt"},
     {"text": "Vision is the art of seeing what is invisible to others.", "author": "Jonathan Swift"},
     {"text": "Create the highest, grandest vision possible for your life, because you become what you believe.", "author": "Oprah Winfrey"},
@@ -54,8 +51,6 @@ POSITIVE_QUOTES = [
     {"text": "If you can dream it, you can do it.", "author": "Walt Disney"},
     {"text": "Shoot for the moon. Even if you miss, you'll land among the stars.", "author": "Les Brown"},
     {"text": "The distance between dreams and reality is called action.", "author": "Unknown"},
-    
-    # --- TECH & BUILDER MINDSET ---
     {"text": "First, solve the problem. Then, write the code.", "author": "John Johnson"},
     {"text": "Experience is the name everyone gives to their mistakes.", "author": "Oscar Wilde"},
     {"text": "Make it work, make it right, make it fast.", "author": "Kent Beck"},
@@ -70,8 +65,6 @@ POSITIVE_QUOTES = [
     {"text": "It’s not a bug; it’s an undocumented feature.", "author": "Anonymous"},
     {"text": "Talk is cheap. Show me the code.", "author": "Linus Torvalds"},
     {"text": "Perfection is achieved not when there is nothing more to add, but rather when there is nothing more to take away.", "author": "Antoine de Saint-Exupery"},
-    
-    # --- CALM & RESILIENCE ---
     {"text": "He who has a why to live can bear almost any how.", "author": "Friedrich Nietzsche"},
     {"text": "Quiet the mind, and the soul will speak.", "author": "Ma Jaya Sati Bhagavati"},
     {"text": "Within you, there is a stillness and a sanctuary to which you can retreat at any time and be yourself.", "author": "Hermann Hesse"},
@@ -82,9 +75,71 @@ POSITIVE_QUOTES = [
     {"text": "Do not go where the path may lead, go instead where there is no path and leave a trail.", "author": "Ralph Waldo Emerson"},
     {"text": "Happiness is not something ready made. It comes from your own actions.", "author": "Dalai Lama"},
     {"text": "Keep your face always toward the sunshine—and shadows will fall behind you.", "author": "Walt Whitman"},
-    
-    # ... (You can continue adding up to 200 using this format)
+    {"text": "Amateurs hack, professionals practice.", "author": "Unknown"},
+    {"text": "The secret of getting ahead is getting started.", "author": "Mark Twain"},
+    {"text": "It’s not that I’m so smart, it’s just that I stay with problems longer.", "author": "Albert Einstein"},
+    {"text": "Your mind is for having ideas, not holding them.", "author": "David Allen"},
+    {"text": "Work gives you meaning and purpose and life is empty without it.", "author": "Stephen Hawking"},
+    {"text": "Great things are done by a series of small things brought together.", "author": "Vincent Van Gogh"},
+    {"text": "The best way to get things done is to simply begin.", "author": "Unknown"},
+    {"text": "Discipline is the bridge between goals and accomplishment.", "author": "Jim Rohn"},
+    {"text": "Don't let yesterday take up too much of today.", "author": "Will Rogers"},
+    {"text": "Innovation distinguishes between a leader and a follower.", "author": "Steve Jobs"},
+    {"text": "Life isn’t about getting and having, it’s about giving and being.", "author": "Kevin Kruse"},
+    {"text": "Whatever the mind of man can conceive and believe, it can achieve.", "author": "Napoleon Hill"},
+    {"text": "Strive not to be a success, but rather to be of value.", "author": "Albert Einstein"},
+    {"text": "Two roads diverged in a wood, and I—I took the one less traveled by, And that has made all the difference.", "author": "Robert Frost"},
+    {"text": "I attribute my success to this: I never gave or took any excuse.", "author": "Florence Nightingale"},
+    {"text": "You miss 100% of the shots you don’t take.", "author": "Wayne Gretzky"},
+    {"text": "I’ve failed over and over and over again in my life. And that is why I succeed.", "author": "Michael Jordan"},
+    {"text": "The most difficult thing is the decision to act, the rest is merely tenacity.", "author": "Amelia Earhart"},
+    {"text": "Every strike brings me closer to the next home run.", "author": "Babe Ruth"},
+    {"text": "Definiteness of purpose is the starting point of all achievement.", "author": "W. Clement Stone"},
+    {"text": "We must balance conspicuous consumption with conscious capitalism.", "author": "Kevin Kruse"},
+    {"text": "Life is what happens to you while you’re busy making other plans.", "author": "John Lennon"},
+    {"text": "We become what we think about.", "author": "Earl Nightingale"},
+    {"text": "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do. Explore, Dream, Discover.", "author": "Mark Twain"},
+    {"text": "Life is 10% what happens to me and 90% of how I react to it.", "author": "Charles Swindoll"},
+    {"text": "The most common way people give up their power is by thinking they don’t have any.", "author": "Alice Walker"},
+    {"text": "The mind is everything. What you think you become.", "author": "Buddha"},
+    {"text": "The best time to plant a tree was 20 years ago. The second best time is now.", "author": "Chinese Proverb"},
+    {"text": "An unexamined life is not worth living.", "author": "Socrates"},
+    {"text": "Eighty percent of success is showing up.", "author": "Woody Allen"},
+    {"text": "Your time is limited, so don’t waste it living someone else’s life.", "author": "Steve Jobs"},
+    {"text": "Winning isn’t everything, but wanting to win is.", "author": "Vince Lombardi"},
+    {"text": "I am not a product of my circumstances. I am a product of my decisions.", "author": "Stephen Covey"},
+    {"text": "Every child is an artist. The problem is how to remain an artist once he grows up.", "author": "Pablo Picasso"},
+    {"text": "You can never cross the ocean until you have the courage to lose sight of the shore.", "author": "Christopher Columbus"},
+    {"text": "I’ve learned that people will forget what you said, but people will never forget how you made them feel.", "author": "Maya Angelou"},
+    {"text": "Whether you think you can or you think you can’t, you’re right.", "author": "Henry Ford"},
+    {"text": "The two most important days in your life are the day you are born and the day you find out why.", "author": "Mark Twain"},
+    {"text": "The best revenge is massive success.", "author": "Frank Sinatra"},
+    {"text": "People often say that motivation doesn’t last. Well, neither does bathing. That’s why we recommend it daily.", "author": "Zig Ziglar"},
+    {"text": "Life shrinks or expands in proportion to one’s courage.", "author": "Anais Nin"},
+    {"text": "If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced.", "author": "Vincent Van Gogh"},
+    {"text": "There is only one way to avoid criticism: do nothing, say nothing, and be nothing.", "author": "Aristotle"},
+    {"text": "The only person you are destined to become is the person you decide to be.", "author": "Ralph Waldo Emerson"},
+    {"text": "Go confidently in the direction of your dreams. Live the life you have imagined.", "author": "Henry David Thoreau"},
+    {"text": "Everything you’ve ever wanted is on the other side of fear.", "author": "George Addair"},
+    {"text": "We can easily forgive a child who is afraid of the dark; the real tragedy of life is when men are afraid of the light.", "author": "Plato"},
+    {"text": "Start where you are. Use what you have. Do what you can.", "author": "Arthur Ashe"},
+    {"text": "Fall seven times and stand up eight.", "author": "Japanese Proverb"},
+    {"text": "When one door of happiness closes, another opens.", "author": "Helen Keller"},
+    {"text": "Everything has beauty, but not everyone can see.", "author": "Confucius"},
+    {"text": "How wonderful it is that nobody need wait a single moment before starting to improve the world.", "author": "Anne Frank"},
+    {"text": "When I let go of what I am, I become what I might be.", "author": "Lao Tzu"},
+    {"text": "Happiness is not something readymade. It comes from your own actions.", "author": "Dalai Lama"},
+    {"text": "If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on.", "author": "Sheryl Sandberg"},
+    {"text": "If you want to lift yourself up, lift up someone else.", "author": "Booker T. Washington"},
+    {"text": "I didn’t fail the test. I just found 100 ways to do it wrong.", "author": "Benjamin Franklin"},
+    {"text": "A person who never made a mistake never tried anything new.", "author": "Albert Einstein"},
+    {"text": "It is never too late to be what you might have been.", "author": "George Eliot"},
+    {"text": "I would rather die of passion than of boredom.", "author": "Vincent van Gogh"},
+    {"text": "Build your own dreams, or someone else will hire you to build theirs.", "author": "Farrah Gray"},
+    {"text": "It does not matter how slowly you go as long as you do not stop.", "author": "Confucius"},
+    {"text": "You can’t use up creativity. The more you use, the more you have.", "author": "Maya Angelou"},
+    {"text": "Do what you can, where you are, with what you have.", "author": "Teddy Roosevelt"},
+    {"text": "Dreaming, after all, is a form of planning.", "author": "Gloria Steinem"},
+    {"text": "Nothing is impossible, the word itself says, “I’m possible!”", "author": "Audrey Hepburn"},
+    {"text": "If you can dream it, you can achieve it.", "author": "Zig Ziglar"}
 ]
-
-# I have provided ~65 here to save space, but you can copy/paste to reach 200.
-# The logic below will work regardless of list size.

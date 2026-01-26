@@ -16,4 +16,13 @@
   <input type="submit" value="Submit!" class="btn">
 </form>
 
+<!-- Materialize JS initialization -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all select elements
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
+
 {% endblock %}

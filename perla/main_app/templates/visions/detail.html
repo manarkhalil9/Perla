@@ -10,40 +10,54 @@
     <div class="card-content">
       <span class="card-title">{{ vision.name }}</span>
 
-      {% load static %}
-      <img src="{% static vision.image|cut:'main_app/static/' %}" alt=''>
+      {% if vision.image %}
+        <img src="{% static vision.image|cut:'main_app/static/' %}" alt="{{ vision.name }}">
+      {% endif %}
 
       <p>{{ vision.description }}</p>
+      <p>{{ vision.get_target_month_display }}</p>
 
       <div>
-        <a href="{% url 'vision_update' vision.id %}">Edit</a>
-        <a href="{% url 'vision_delete' vision.id %}">Delete</a>
+        <a href="{% url 'vision_update' vision.id %}" class="btn grey">Edit Vision</a>
+        <a href="{% url 'vision_delete' vision.id %}" class="btn red">Delete Vision</a>
       </div>
     </div>
   </div>
+
+  <!-- Add Task Form -->
+  <h4>Add a Task for "{{ vision.name }}"</h4>
+  <form action="{% url 'task_create' vision.id %}" method="post">
+    {% csrf_token %}
+    {{ task_form.as_p }}
+    <input type="submit" class="btn" value="Add Task">
+  </form>
+
+  <!-- Vision Tasks List -->
+  <h4>Vision Tasks</h4>
+  <ul class="collection">
+    {% for task in vision.visiontask_set.all %}
+      <li class="collection-item">
+        {{ task.title }} - {{ task.get_month_display }}
+
+        <a href="{% url 'task_update' task.id %}" class="btn-flat">Edit</a>
+        <a href="{% url 'task_delete' task.id %}" class="btn-flat red-text">Delete</a>
+      </li>
+    {% empty %}
+      <li class="collection-item">No tasks yet</li>
+    {% endfor %}
+  </ul>
 
 {% else %}
   <p>Vision not found.</p>
 {% endif %}
 
-<a href="{% url 'task_create' vision.id %}" class="btn">
-  + Add Task
-</a>
-
-<h4>Vision Tasks</h4>
-
-<ul class="collection">
-  {% for task in vision.visiontask_set.all %}
-    <li class="collection-item">
-      {{ task.title }} - {{ task.get_month_display }}
-
-      <a href="{% url 'task_update' task.id %}">Edit</a>
-      <a href="{% url 'task_delete' task.id %}" class="red-text">Delete</a>
-    </li>
-  {% empty %}
-    <li class="collection-item">No tasks yet</li>
-  {% endfor %}
-</ul>
-
+<!-- Materialize JS initialization -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all select elements
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
 
 {% endblock %}

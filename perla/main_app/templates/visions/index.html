@@ -12,6 +12,8 @@
         <span class="card-title">{{ vision.name }}</span>
         <p>{{ vision.description }}</p>
 
+        <p>{{ vision.get_target_month_display }}</p>
+
         {% if vision.image %}
       <img src="{% static vision.image|cut:'main_app/static/' %}" alt=''>
         {% endif %}
@@ -21,5 +23,13 @@
 {% empty %}
   <p>No visions found.</p>
 {% endfor %}
+<!-- Materialize JS initialization -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all select elements
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
 
 {% endblock %}
