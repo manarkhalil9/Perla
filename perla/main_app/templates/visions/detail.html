@@ -10,12 +10,17 @@
     <div class="card-content">
       <span class="card-title">{{ vision.name }}</span>
 
-      {% if vision.image %}
+    {% if vision.image %}
+    <div class="card-image">
         <img src="{% static vision.image|cut:'main_app/static/' %}" alt="{{ vision.name }}">
-      {% endif %}
+    </div>
+    {% endif %}
 
-      <p>{{ vision.description }}</p>
-      <p>{{ vision.get_target_month_display }}</p>
+    {% if vision.description %}
+        <p>{{ vision.description }}</p>
+    {% endif %}
+
+    <p>{{ vision.get_target_month_display }}</p>
 
       <div>
         <a href="{% url 'vision_update' vision.id %}" class="btn grey">Edit Vision</a>

@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 MONTHS = (
@@ -22,7 +22,7 @@ MONTHS = (
 # vision model
 class Vision(models.Model):
     name = models.CharField(max_length=100)
-    description = models.CharField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
     target_month = models.CharField(max_length=3, choices=MONTHS)
     image = models.ImageField(upload_to='main_app/static/uploads/', default='', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -30,8 +30,21 @@ class Vision(models.Model):
     def __str__(self):
         return f'{self.name} - {self.get_target_month_display()}'
     
+    # this method runs during form validation
+    def clean(self):
+        super().clean()
+        # if both fields are missing, the data is invalid
+        if not self.description and not self.image:
+            raise ValidationError('You must provide either a description or an image.')
+        
+    # overriding save ensures the clean() logic is enforced even outside of forms
+    def save(self, *args, **kwargs):
+        # manually trigger the clean() method
+        self.full_clean() 
+        return super().save(*args, **kwargs)
+    
     def get_absolute_url(self):
-        return reverse('vision_detail', kwargs={'pk': self.id})
+        return reverse('vision_detail', kwargs={'vision_id': self.id})
     
 # visions tasks model
 class VisionTask(models.Model):

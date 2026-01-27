@@ -10,6 +10,16 @@
 
 <form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
+
+  <!-- to show ValidationError -->
+  {% if form.non_field_errors %}
+    <div class="card-panel red lighten-4 red-text">
+      {% for error in form.non_field_errors %}
+        <p><strong>Error:</strong> {{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+
   <table>
     {{ form.as_table }}
   </table>
