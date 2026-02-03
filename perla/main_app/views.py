@@ -9,16 +9,69 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .utils import get_quote
+from datetime import date
 
 # Create your views here.
 
 # home
 @login_required
-def home(request):
+def home(request, vision_id=None):
     todos = TodoItem.objects.filter(user=request.user)
-    visions = Vision.objects.filter(user=request.user)
+    visions = Vision.objects.filter(user=request.user).prefetch_related('visiontask_set')
     quote_data = get_quote
-    return render(request, 'home.html', {'todos': todos, 'quote':quote_data, 'visions':visions})
+
+    selected_vision = None
+    tasks = []
+    month_progress = {}
+
+    # if user clicks a vision
+    if vision_id:
+        # Get the selected vision
+        selected_vision = Vision.objects.get(id=vision_id, user=request.user)
+        # get all tasks of this vision
+        tasks = selected_vision.visiontask_set.all()
+
+        month_order = [
+            'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
+            'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
+        ]
+        # sort tasks by month
+        # return orderd version of tasks list
+        # key=lambda t: name each task as t
+        # month_order.index(t.month) gives the month position number
+        tasks = sorted(tasks, key=lambda t: month_order.index(t.month))
+
+        # calculate progress
+        # loop through every task that belongs to the selected vision
+        for task in tasks:
+            # get the month of the task
+            month = task.month
+
+            # if this month is not already in the dictionary
+            # create a new entry for it
+            if month not in month_progress:
+                month_progress[month] = {'total': 0, 'done': 0}
+
+            # every time we see a task, increase total tasks
+            month_progress[month]['total'] += 1
+
+            # check if this task exists in the todo list and done
+            for todo in todos:
+                # if this to do is linked to the same task and user marked it as done
+                if todo.task == task and todo.is_done:
+                    # increase finished counter
+                    month_progress[month]['done'] += 1
+                    # stop checking more todos for this task, 'bec we already found it'
+                    break
+
+    return render(request, 'home.html', {
+    'todos': todos, 
+    'quote':quote_data,
+    'visions':visions, 
+    'selected_vision': selected_vision,
+    'tasks': tasks,
+    'month_progress': month_progress, 
+    })
 
 # about
 def about(request):
@@ -95,7 +148,7 @@ def todo_add(request):
         )
         return redirect('home')
     
-# change status
+# change status  
 @login_required
 def todo_toggle(request, todo_id):
     todo = TodoItem.objects.get(id=todo_id)
@@ -110,6 +163,25 @@ def todo_delete(request, todo_id):
     todo.delete()
     return redirect('home')
 
+# add a todo from a vision task (+ button in timeline)
+@login_required
+def todo_from_task(request, task_id):
+    # ensure the user owns the task
+    task = VisionTask.objects.get(id=task_id, user=request.user)
+
+    # Only create if it doesn't exist yet
+    if not TodoItem.objects.filter(task=task, user=request.user).exists():
+        TodoItem.objects.create(
+            title=task.title,
+            priority='medium',
+            # required field, use today
+            date=date.today(),  
+            user=request.user,
+            task=task,
+        )
+    return redirect('select_vision', vision_id=task.vision.id)
+
+# auth
 def signup(request):
   error_message = ''
   if request.method == 'POST':

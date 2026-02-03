@@ -50,3 +50,39 @@ main.container {
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
+
+.month-timeline{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+
+.month-box{
+  text-align:center;
+  font-size:12px;
+}
+
+.circle{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #ccc;
+}
+
+.done{
+  background:#4caf50;
+  color:white;
+}
+
+.progress{
+  background:#ff9800;
+}
+
+.planned{
+  background:#e0e0e0;
+}

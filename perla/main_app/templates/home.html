@@ -1,80 +1,143 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+<div class="container">
 
-<div class="row">
-  <div class="col s12 m8 offset-m2">
-
-    <div class="quote-container">
-    <p class="quote-text">"{{ quote.text }}"</p>
-    <p class="quote-author">— {{ quote.author }}</p>
-    </div>
-
-    <h3 class="center-align">Welcome to Perla Planner</h3>
-    <p class="center-align grey-text text-darken-1">
-      Organize your visions and tasks with calm and elegance.
-    </p>
-
-    <hr>
-
-    {% if user.is_authenticated %}
-      <h5>My To-Do List</h5>
-
-      <!-- Add Task Form -->
-      <div class="card">
-        <div class="card-content">
-          <form method="POST" action="{% url 'todo_add' %}">
-            {% csrf_token %}
-            <div class="input-field">
-              <input type="text" name="title" id="title" placeholder="Task title" required>
-              <label for="title">Task Title</label>
-            </div>
-            <div class="input-field">
-              <input type="date" name="date" id="date" required>
-              <label for="date">Due Date</label>
-            </div>
-            <div class="input-field">
-              <input type="text" name="priority" id="priority" placeholder="Priority (low / medium / high)" required>
-              <label for="priority">Priority</label>
-            </div>
-            <div class="center-align">
-              <button type="submit" class="btn waves-effect waves-light">Add Task</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- To-Do List -->
-      <ul class="collection with-header">
-        {% for todo in todos %}
-          <li class="collection-item">
-            {% if todo.is_done %}
-              <strike>{{ todo.title }}</strike>
-            {% else %}
-              {{ todo.title }}
-            {% endif %}
-            <span class="grey-text right">
-              ({{ todo.date }} • {{ todo.priority }})
-            </span>
-            <div class="secondary-content">
-              <a href="{% url 'todo_toggle' todo.id %}" class="green-text">✔</a>
-              <a href="{% url 'todo_delete' todo.id %}" class="red-text">✖</a>
-            </div>
-          </li>
-        {% empty %}
-          <li class="collection-item">No tasks yet. Add one above!</li>
-        {% endfor %}
-      </ul>
-
-    {% else %}
-      <div class="card-panel yellow lighten-4 center-align">
-        <p>
-          You are not logged in. Please <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'signup' %}">Sign Up</a> to manage your To-Do list.
-        </p>
-      </div>
-    {% endif %}
-
+  <!-- Quote -->
+  <div class="center-align">
+    <p>"{{ quote.text }}"</p>
+    <p>— {{ quote.author }}</p>
   </div>
-</div>
 
+  <h4 class="center-align">Welcome to Perla Planner</h4>
+  <hr>
+
+  <!-- TO-DO LIST -->
+  <h5>My To-Do List</h5>
+  <div class="card">
+    <div class="card-content">
+      <form method="POST" action="{% url 'todo_add' %}">
+        {% csrf_token %}
+        <div class="input-field">
+          <input type="text" name="title" required>
+          <label>Task Title</label>
+        </div>
+        <div class="input-field">
+          <input type="date" name="date" required>
+          <label>Due Date</label>
+        </div>
+        <div class="input-field">
+          <input type="text" name="priority" required>
+          <label>Priority</label>
+        </div>
+        <button class="btn">Add Task</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- To-Do List Items -->
+  <ul class="collection">
+    {% for todo in todos %}
+      <li class="collection-item">
+        {% if todo.is_done %}
+          <strike>{{ todo.title }}</strike>
+        {% else %}
+          {{ todo.title }}
+        {% endif %}
+        <span class="right grey-text">{{ todo.date }}</span>
+        <div class="secondary-content">
+          <a href="{% url 'todo_toggle' todo.id %}">✔</a>
+          <a href="{% url 'todo_delete' todo.id %}">✖</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="collection-item">No tasks yet</li>
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  <!-- VISION BOARD -->
+  <h5>My Vision Board</h5>
+  <div class="row">
+    {% for vision in visions %}
+      <div class="col s12 m6 l4">
+        <a href="{% url 'select_vision' vision.id %}" class="black-text">
+          <div class="card hoverable">
+            {% if vision.image %}
+              <div class="card-image">
+                <img src="{% static vision.image|cut:'main_app/static/' %}">
+              </div>
+            {% endif %}
+            <div class="card-content">
+              <span class="card-title">{{ vision.name }}</span>
+              <small>{{ vision.get_target_month_display }}</small>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <hr>
+
+  <!-- TIMELINE -->
+  <h5>Vision Timeline</h5>
+  {% if selected_vision %}
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ selected_vision.name }}</span>
+
+        <!-- Tasks grouped by month -->
+        {% regroup tasks by month as month_list %}
+
+        {% for month in month_list %}
+          <h6 class="blue-text text-darken-2">{{ month.grouper }}</h6>
+          <ul class="collection">
+            {% for task in month.list %}
+              <li class="collection-item">
+                {{ task.title }}
+
+                {% comment %}Check if task exists in todo{% endcomment %}
+                {% with found=False %}
+                  {% for todo in todos %}
+                    {% if todo.title == task.title %}
+                      {% with found=True %}{% endwith %}
+                    {% endif %}
+                  {% endfor %}
+
+                  <span class="right">
+                    <!-- DONE -->
+                    {% for todo in todos %}
+                      {% if todo.title == task.title and todo.is_done %}
+                        <span class="green-text">Done ✓</span>
+                      {% endif %}
+                    {% endfor %}
+
+                    <!-- ADDED -->
+                    {% for todo in todos %}
+                      {% if todo.title == task.title and not todo.is_done %}
+                        <span class="orange-text">Added</span>
+                      {% endif %}
+                    {% endfor %}
+
+                    <!-- NOT ADDED -->
+                    {% if not found %}
+                      <a href="{% url 'todo_from_task' task.id %}" class="btn-small">+</a>
+                    {% endif %}
+                  </span>
+                {% endwith %}
+
+              </li>
+            {% endfor %}
+          </ul>
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+    <p>Select a vision to view its timeline.</p>
+  {% endif %}
+
+</div>
 {% endblock %}

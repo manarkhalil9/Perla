@@ -3,7 +3,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', views.home, name='home'), 
+    # click vision
+    path('select_vision/<int:vision_id>/', views.home, name='select_vision'),
+
     path('about/', views.about, name='about'),
 
     # full CRUD vision URLs
@@ -22,6 +25,10 @@ urlpatterns = [
     path('todos/add/', views.todo_add, name='todo_add'),
     path('todos/<int:todo_id>/toggle/', views.todo_toggle, name='todo_toggle'),
     path('todos/<int:todo_id>/delete/', views.todo_delete, name='todo_delete'),
+
+    # URL to handle adding a VisionTask to the To-Do list
+    path('tasks/<int:task_id>/to-todo/', views.todo_from_task, name='todo_from_task'),
+
 
     path('accounts/signup/', views.signup, name='signup'),
 

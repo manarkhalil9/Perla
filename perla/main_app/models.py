@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from datetime import date
 
 # Create your models here.
 MONTHS = (
@@ -62,9 +63,10 @@ class VisionTask(models.Model):
 # todoItem model
 class TodoItem(models.Model):
     title = models.CharField(max_length=100)
-    date = models.DateField()
+    date = models.DateField(default=date.today)
     priority = models.CharField(max_length=20)
     is_done = models.BooleanField(default=False)
+    task = models.ForeignKey(VisionTask, on_delete=models.CASCADE, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
