@@ -21,56 +21,69 @@ def home(request, vision_id=None):
     quote_data = get_quote
 
     selected_vision = None
-    tasks = []
-    month_progress = {}
+    timeline = []
 
     # if user clicks a vision
     if vision_id:
         # Get the selected vision
         selected_vision = Vision.objects.get(id=vision_id, user=request.user)
-        # get all tasks of this vision
-        tasks = selected_vision.visiontask_set.all()
 
         month_order = [
             'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
             'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
         ]
-        # sort tasks by month
-        # return orderd version of tasks list
-        # key=lambda t: name each task as t
-        # month_order.index(t.month) gives the month position number
-        tasks = sorted(tasks, key=lambda t: month_order.index(t.month))
 
-        # calculate progress
-        # loop through every task that belongs to the selected vision
-        for task in tasks:
-            # get the month of the task
-            month = task.month
+        # get all tasks of this vision
+        tasks = VisionTask.objects.filter(vision=selected_vision, user=request.user)
 
-            # if this month is not already in the dictionary
-            # create a new entry for it
-            if month not in month_progress:
-                month_progress[month] = {'total': 0, 'done': 0}
+        # if no tasks => nothing to show
+        if tasks.exists():
+            # find earliest month that has tasks
+            task_month_indexes = [month_order.index(t.month) for t in tasks]
+            start_index = min(task_month_indexes)
 
-            # every time we see a task, increase total tasks
-            month_progress[month]['total'] += 1
+            # stop at target month
+            end_index = month_order.index(selected_vision.target_month)
 
-            # check if this task exists in the todo list and done
-            for todo in todos:
-                # if this to do is linked to the same task and user marked it as done
-                if todo.task == task and todo.is_done:
-                    # increase finished counter
-                    month_progress[month]['done'] += 1
-                    # stop checking more todos for this task, 'bec we already found it'
-                    break
+            months_to_show = month_order[start_index:end_index + 1]
+
+            # filter the tasks related to this month
+            for month in months_to_show:
+                month_tasks = tasks.filter(month=month)
+
+                # add is_added flag to each task
+                for task in month_tasks:
+                    task.is_added = TodoItem.objects.filter(task=task, user=request.user).exists()
+
+                total = month_tasks.count()
+                # count done tasks
+                done = month_tasks.filter(todoitem__is_done=True, todoitem__user=request.user).distinct().count()
+
+                # check if at least one task is added to todo but not done
+                added_not_done = month_tasks.filter(todoitem__is_done=False, todoitem__user=request.user).distinct().exists()
+                # decide status
+                if total > 0 and done == total:
+                    status = 'done'
+                elif added_not_done:
+                    status = 'progress'
+                elif total > 0:
+                    status = 'planned'
+                else:
+                    status = 'empty'
+
+                timeline.append({
+                    'month': month,
+                    'tasks': month_tasks,
+                    'status': status,
+                    'circle_status': status,
+                })
 
     return render(request, 'home.html', {
-    'todos': todos, 
-    'quote':quote_data,
-    'visions':visions, 
-    'selected_vision': selected_vision,
-    'tasks': tasks,
-    'month_progress': month_progress, 
+        'todos': todos, 
+        'quote': quote_data,
+        'visions': visions, 
+        'selected_vision': selected_vision,
+        'timeline': timeline,
     })
 
 # about

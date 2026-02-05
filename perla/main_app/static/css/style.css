@@ -1,7 +1,10 @@
+/* ================= GLOBAL ================= */
 body {
     background: #fefcfb;
     font-family: 'Helvetica', sans-serif;
     color: #5a4d41;
+    margin: 0;
+    padding: 0;
 }
 
 nav,
@@ -22,67 +25,120 @@ main.container {
     padding-top: 20px;
 }
 
+/* ================= ABOUT PAGE ================= */
 .about-page {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
 }
 
 .about-page h1 {
-  text-align: center;
-  margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .about-page .intro {
-  text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
 }
 
 .about-sections {
-  display: grid;
-  gap: 20px;
+    display: grid;
+    gap: 20px;
 }
 
 .about-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.month-timeline{
-  display:flex;
-  gap:15px;
-  flex-wrap:wrap;
-  margin:20px 0;
+/* ================= TODO & VISION BOARD LAYOUT ================= */
+.board-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-.month-box{
-  text-align:center;
-  font-size:12px;
+/* Vision board on the left */
+.vision-board {
+    flex: 1 1 400px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: masonry;
+    gap: 20px;
 }
 
-.circle{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:2px solid #ccc;
+/* TODO list on the right */
+.todo-list {
+    flex: 0 0 300px;
 }
 
-.done{
-  background:#4caf50;
-  color:white;
+/* ================= TODO CARD ================= */
+.card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-.progress{
-  background:#ff9800;
+.collection-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.planned{
-  background:#e0e0e0;
+/* ================= TIMELINE ================= */
+.timeline-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* MONTH CIRCLES ROW */
+.timeline-row {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.timeline-month {
+    text-align: center;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.done { background:#c79b63; }
+.progress { background:#e7cfc4; }
+.planned { background:#e5e5e5; }
+.empty { background:#f3f3f3; }
+
+/* ================= TASK ITEMS ================= */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    min-height: 40px;
+}
+
+.task-item .right a {
+    text-decoration: none;
+    color: #c79b63;
+    font-weight: bold;
 }
