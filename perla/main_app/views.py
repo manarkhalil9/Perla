@@ -17,8 +17,12 @@ from datetime import date
 @login_required
 def home(request, vision_id=None):
     todos = TodoItem.objects.filter(user=request.user)
+
+    active_todos = todos.filter(is_done=False).order_by('date')
+    completed_todos = todos.filter(is_done=True).order_by('-date')
+
     visions = Vision.objects.filter(user=request.user).prefetch_related('visiontask_set')
-    quote_data = get_quote
+    quote_data = get_quote()
 
     selected_vision = None
     timeline = []
@@ -79,7 +83,8 @@ def home(request, vision_id=None):
                 })
 
     return render(request, 'home.html', {
-        'todos': todos, 
+        'active_todos': active_todos,
+        'completed_todos': completed_todos,
         'quote': quote_data,
         'visions': visions, 
         'selected_vision': selected_vision,
@@ -151,15 +156,18 @@ class VisionTaskDelete(LoginRequiredMixin, DeleteView):
 
 # todo list
 @login_required
-def todo_add(request):
+def todo_add_form(request):
     if request.method == 'POST':
+        is_important = 'is_important' in request.POST
+
         TodoItem.objects.create(
             title=request.POST['title'],
             date=request.POST['date'],
-            priority=request.POST['priority'],
+            priority='high' if is_important else 'low',
             user=request.user
         )
         return redirect('home')
+    return render(request, 'main_app/addTodo.html')
     
 # change status  
 @login_required
@@ -175,6 +183,23 @@ def todo_delete(request, todo_id):
     todo = TodoItem.objects.get(id=todo_id)
     todo.delete()
     return redirect('home')
+
+# edit
+@login_required
+def todo_edit(request, todo_id):
+    # get todo that belongs to current user only
+    todo = TodoItem.objects.get(id=todo_id, user=request.user)
+
+    if request.method == 'POST':
+        is_important = 'is_important' in request.POST
+        # update fields from form 
+        todo.title = request.POST['title']
+        todo.date = request.POST['date']
+        todo.priority='high' if is_important else 'low',
+        todo.save()
+
+        return redirect('home')
+    return render(request, 'main_app/editTodo.html', {'todo': todo})
 
 # add a todo from a vision task (+ button in timeline)
 @login_required

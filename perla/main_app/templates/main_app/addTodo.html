@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h4>Add Task</h4>
+
+<form method="post">
+  {% csrf_token %}
+
+  <!-- Title -->
+  <div class="input-field">
+    <label for="title">Task Title</label>
+    <input id="title" name="title" type="text" required>
+  </div>
+
+  <!-- Date -->
+  <div class="input-field">
+    <label for="date">Due Date</label>
+    <input id="date" name="date" type="date" required>
+  </div>
+
+  <!-- Priority -->
+  <p>
+    <label>
+      <input type="checkbox" name="is_important" />
+      <span>Important ❗</span>
+    </label>
+  </p>
+
+  <button type="submit" class="btn">Save</button>
+</form>
+
+<!-- Materialize JS initialization -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all select elements
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
+
+{% endblock %}

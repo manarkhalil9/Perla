@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h5>Edit Task</h5>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <!-- Title -->
+  <div class="input-field">
+    <label for="title">Task Title</label>
+    <input
+      id="title"
+      name="title"
+      type="text"
+      value="{{ todo.title }}"
+      required>
+  </div>
+
+  <!-- Date -->
+  <div class="input-field">
+    <label for="date">Due Date</label>
+    <input
+      id="date"
+      name="date"
+      type="date"
+      value="{{ todo.date|date:'Y-m-d' }}"
+      required>
+  </div>
+
+  <!-- Priority -->
+  <p>
+    <label>
+      <input type="checkbox" name="is_important" />
+      <span>Important ❗</span>
+    </label>
+  </p>
+
+  <!-- Button -->
+  <button type="submit" class="btn">Update</button>
+  <button type="submit" class="{% url 'home'%}">Back to Home</button>
+</form>
+
+<!-- Materialize JS initialization -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all select elements
+    var selectEls = document.querySelectorAll('select');
+    M.FormSelect.init(selectEls);
+  });
+</script>
+
+{% endblock %}

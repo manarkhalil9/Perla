@@ -41,55 +41,55 @@
 
     </div>
 
-    <!-- ================= TO DO LIST ================= -->
+    <!-- ================= TODO ITEMS LIST ================= -->
     <div class="todo-list">
 
-      <h5>My To-Do List</h5>
+       <h5>My To-Dos</h5>
+       <ul class="collection">
+        {% for todo in active_todos %}
+        <li class="collection-item">
 
-      <!-- Add new todo form -->
-      <div class="card">
-        <div class="card-content">
+          <!-- toggle -->
+           <a href="{% url 'todo_toggle' todo.id %}">⭕</a>
 
-          <!-- POST form to create new todo -->
-          <form method="POST" action="{% url 'todo_add' %}">
-            {% csrf_token %}
-            <div class="input-field">
-              <input type="text" name="title" required>
-              <label>Task Title</label>
-            </div>
-            <div class="input-field">
-              <input type="date" name="date" required>
-              <label>Due Date</label>
-            </div>
-            <div class="input-field">
-              <input type="text" name="priority" required>
-              <label>Priority</label>
-            </div>
-            <button class="btn">Add Task</button>
-          </form>
+           <!-- delete -->
+           <a href="{% url 'todo_delete' todo.id %}">✖</a>
 
-        </div>
-      </div>
+           <!-- click to edit -->
+            <a href="{% url 'todo_edit' todo.id %}" class="black-text">{{ todo.title }}</a>
 
-      <!-- ================= TODO ITEMS LIST ================= -->
-      <ul class="collection">
-        {% for todo in todos %}
-          <li class="collection-item">
-            {% if todo.is_done %}<strike>{{ todo.title }}</strike>{% else %}{{ todo.title }}{% endif %}
-            <span class="right grey-text">{{ todo.date }}</span>
-            <div class="secondary-content">
-              <a href="{% url 'todo_toggle' todo.id %}">✔</a>
-              <a href="{% url 'todo_delete' todo.id %}">✖</a>
-            </div>
-          </li>
+            <!-- priority -->
+             {% if todo.priority == 'high' %}
+             <span> ❗ </span>
+             {% endif %}
+        </li>
         {% empty %}
-          <li class="collection-item">No tasks yet</li>
+        <li class="collection-item">No tasks yet</li>
         {% endfor %}
-      </ul>
+       </ul>
 
-    </div>
+       <h6>completed</h6>
+       <ul class="collection grey lighten-4">
+        {% for todo in completed_todos %}
+        <li class="collection-item grey-text">
+        <!-- strike title -->
+        <strike>{{ todo.title }}</strike>
 
-  </div> <!-- end board-container -->
+        <!-- toggle to reactivate -->
+        <a href="{% url 'todo_toggle' todo.id %}" class="secondary-content">✔</a>
+
+        <!-- delete -->
+        <a href="{% url 'todo_delete' todo.id %}">✖</a>
+        </li>
+        {% endfor%}
+       </ul>
+
+    <!-- ================= ADD TO DO ================= -->
+    <div class="todo-list">
+
+      <div class="flixed-action btn">
+        <a href="{% url 'todo_add_form' %}"> + </a>
+      </div>
 
   <hr>
 
