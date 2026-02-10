@@ -1,20 +1,38 @@
-# Perla🦪
-Perla is a personal planning web application designed to help users turn long-term visions into achievable monthly and daily actions in a calm, pearl-inspired environment.
+# Perla 🦪
 
-Users are welcomed each day with a random motivational quote, manage a personal to-do list, build a yearly vision board, and track their progress through a dynamic timeline that updates as goals and tasks are completed.
+Perla is a personal planning web application that helps users transform long-term visions into clear monthly and daily actions within a calm, pearl-inspired environment.
 
-# 🛠️ Technologies Used
-Backend:
+The app combines goal setting, task management, and progress tracking to create a focused and motivating planning experience. Users receive a daily inspirational quote, organize their to-do list, build yearly visions, and visually monitor their progress through an interactive timeline.
+
+Perla is designed to make productivity feel peaceful, structured, and achievable.
+
+# ✨ Features
+
+Secure user authentication (Sign up / Login / Logout)
+
+Daily random motivational quote
+
+Personal to-do list with full CRUD functionality
+
+Yearly vision board creation
+
+Vision tasks organized by month
+
+Dynamic timeline to track goal progress
+
+Add vision tasks directly to the to-do list
+
+Progress-based status indicators (planned • in progress • done)
+
+# 🛠️ Technologies & Tools
 
 Python
 
 Django
 
-Django Authentication (username & password)
+PostgreSQL
 
-PostgreSQL / SQLite (development)
-
-Frontend:
+SQLite (development)
 
 Django Templates (DTL)
 
@@ -22,38 +40,26 @@ HTML
 
 CSS
 
-APIs
+REST / External APIs
 
-Tools
+Git & GitHub
 
-GitHub
+Figma (Wireframes & UI design)
 
-Figma (Wireframes)
+SmartDraw (ERD design)
 
-SmartDraw (ERD)
+Trello (Project management & planning)
 
-Trello (Project Planning)
+# 📐 Planning & Design
+🎨 Wireframes
 
-# 🧩 Features
+🔗 https://www.figma.com/make/vsbXbh9FiV91vMzwRNdDyQ/Personal-Web-Planner-Wireframe?t=FcWaEzzJe0kzJ93p-1
 
-User authentication (login & logout)
+🗂️ Project Board (Trello)
 
-Daily random positive quote on login
+🔗 https://trello.com/b/ERmtsFXK/perla
 
-Personal to-do list with full CRUD
 
-Yearly vision board
+# 🧩 Entity Relationship Diagram (ERD)
 
-Vision steps linked to monthly progress
-
-Dynamic timeline showing vision progress
-
-Add vision steps directly to the to-do list
-
-# 📐 Wireframes
-
-🔗 Wireframe Link: https://www.figma.com/make/vsbXbh9FiV91vMzwRNdDyQ/Personal-Web-Planner-Wireframe?t=FcWaEzzJe0kzJ93p-1
-
-# 🗂️ Entity Relationship Diagram (ERD)
-
-<img width="434" height="394" alt="Screenshot 2026-01-20 203146" src="https://github.com/user-attachments/assets/1ac40d37-bf1a-4d1e-838d-f50edae856a4" />
+<img width="724" height="538" alt="Screenshot 2026-01-21 001501" src="https://github.com/user-attachments/assets/881f29fe-9cd3-447c-8621-f1f1126b5a67" />
