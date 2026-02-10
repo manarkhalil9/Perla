@@ -108,7 +108,7 @@
               <span class="task-title">{{ task.title }}</span>
               <span class="task-actions">
                 {% if not task.is_added %}
-                  <a href="{% url 'todo_from_task' task.id %}" class="task-add-link">+ Add to Today</a>
+                  <a href="{% url 'todo_from_task' task.id %}" class="task-add-link">+ Add to Intentions</a>
                 {% endif %}
               </span>
             </div>

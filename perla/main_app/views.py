@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponse
 from .models import Vision, VisionTask, TodoItem
 from .forms import VisionTaskForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -98,7 +97,16 @@ def about(request):
 # visions
 @login_required
 def vision_index(request):
-    visions = Vision.objects.all()
+    month_order = [
+        'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
+        'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'
+    ]
+
+    visions = Vision.objects.filter(user=request.user)
+
+    # custom sort by month order
+    visions = sorted(visions, key=lambda v: month_order.index(v.target_month))
+    
     return render(request, 'visions/index.html', {'visions': visions})
 
 @login_required
