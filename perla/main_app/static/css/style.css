@@ -270,3 +270,107 @@ input, select, textarea {
     display: flex;
     justify-content: space-between;
 }
+
+/* ================= ABOUT PAGE ================= */
+.about-page {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #FCF9F6, #F9F7F5);
+    border-radius: 12px;
+}
+
+.about-page h1 {
+    text-align: center;
+    color: var(--soft-olive);
+    font-size: 2.6rem;
+    font-weight: 600;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.about-page h1::before {
+    display: block;
+    font-size: 2rem;
+    color: var(--pearl-white);
+    text-shadow: 0 0 4px rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+}
+
+.about-page .intro {
+    text-align: center;
+    color: var(--text-earth);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.about-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.about-card {
+    background: #fffdfa;
+    padding: 32px 28px;
+    border-radius: 18px;
+    border: 1px solid var(--border-beige);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 70%);
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+.about-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+    background: #fffdfa;
+}
+
+.about-card h3 {
+    color: var(--soft-olive);
+    margin-bottom: 22px;
+    font-size: 1.35rem;
+    font-weight: 600;
+    position: relative;
+}
+
+.about-card h3::before {
+    content: "🦪";
+    margin-right: 8px;
+    font-size: 2rem;
+}
+
+.about-card p {
+    color: var(--text-earth);
+    line-height: 1.75;
+    margin-bottom: 18px;
+}
+
+.about-card ul {
+    list-style-type: disc;
+    padding-left: 22px;
+    color: var(--text-earth);
+    font-size: 1.02rem;
+    line-height: 1.65;
+}
+
+.about-card:hover::before {
+    background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 70%);
+}
