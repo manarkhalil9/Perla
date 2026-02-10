@@ -102,16 +102,24 @@ button[type="submit"]:hover,
 /* ================= VISION BOARD ================= */
 .vision-polaroid {
     background: var(--polaroid-white);
-    padding: 8px;
+    padding: 10px;
+    border-radius: 14px;
     border: 1px solid var(--border-beige);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.vision-polaroid:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
 }
 
 .polaroid-img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .vision-name {
@@ -174,10 +182,11 @@ button[type="submit"]:hover,
 }
 
 .circle {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     margin: 0 auto 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .done { 
@@ -188,6 +197,11 @@ button[type="submit"]:hover,
 .progress { background: var(--sage-olive) !important; }
 .planned { background: var(--border-beige) !important; }
 .empty { background: #EAECEE !important; }
+
+.circle:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 4px var(--pearl-white), 0 0 0 5px var(--soft-olive);
+}
 
 .month-tag {
     background: var(--noody-beige);
@@ -220,14 +234,37 @@ input, select, textarea {
     display: flex;
     flex-direction: column;
     gap: 28px;
+    background: linear-gradient(to bottom, #FCF9F6, #FDFBF9); /* soft pearl glow */
+    padding: 20px 15px;
+    border-radius: 16px;
 }
 
 .perla-card {
-    background: white;
-    border-radius: 14px;
+    background: #fffdfa;
+    border-radius: 18px;
     border: 1px solid var(--border-beige);
-    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     padding: 25px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.perla-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 70%);
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+.perla-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
 }
 
 .dashboard-row {
@@ -237,7 +274,25 @@ input, select, textarea {
 }
 
 .quote-card {
-    padding: 22px;
+    padding: 30px;
+    font-style: italic;
+    text-align: center;
+    color: var(--text-earth);
+    background: linear-gradient(to top right, #fffdfa, #FCF9F6);
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+}
+
+.quote-card::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    background: radial-gradient(circle at 35% 35%, rgba(255,255,255,0.35), transparent 70%);
+    transform: rotate(15deg);
+    pointer-events: none;
 }
 
 .vision-card {
@@ -253,16 +308,30 @@ input, select, textarea {
 .todo-card {
     background: #FFFBF7;
     border-left: 6px solid var(--soft-olive);
+    border-radius: 18px;
+    padding: 25px;
 }
 
 .timeline-card {
     padding: 40px;
+    border-radius: 18px;
 }
 
 .section-title {
     color: var(--soft-olive);
     margin-bottom: 20px;
     font-weight: 600;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: "⚪";
+    font-size: 1.4rem;
+    color: var(--pearl-white);
+    text-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 /* ================= FLEX HELPERS ================= */
