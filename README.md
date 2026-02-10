@@ -63,3 +63,13 @@ Trello (Project management & planning)
 # 🧩 Entity Relationship Diagram (ERD)
 
 <img width="724" height="538" alt="Screenshot 2026-01-21 001501" src="https://github.com/user-attachments/assets/881f29fe-9cd3-447c-8621-f1f1126b5a67" />
+
+# 🚀 Future Enhancements
+
+Drag & drop task ordering
+
+Calendar view
+
+Notifications & reminders
+
+Mobile-responsive enhancements
