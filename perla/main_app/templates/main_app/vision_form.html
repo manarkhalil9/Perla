@@ -1,38 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="add-edit-container">
 
-{% if object %}
-  <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
-{% else %}
-  <h1>Add Vision</h1>
-{% endif %}
-
-<form action="" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-
-  <!-- to show ValidationError -->
-  {% if form.non_field_errors %}
-    <div class="card-panel red lighten-4 red-text">
-      {% for error in form.non_field_errors %}
-        <p><strong>Error:</strong> {{ error }}</p>
-      {% endfor %}
-    </div>
+  <!-- Back button -->
+  {% if object %}
+    <a href="{% url 'vision_detail' object.id %}" class="btn grey back-btn">← Back</a>
   {% endif %}
 
-  <table>
-    {{ form.as_table }}
-  </table>
-  <input type="submit" value="Submit!" class="btn">
-</form>
+  {% if object %}
+    <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+  {% else %}
+    <h1>🦪 Add Vision</h1>
+  {% endif %}
+
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- to show ValidationError -->
+    {% if form.non_field_errors %}
+      <div class="card-panel red lighten-4 red-text">
+        {% for error in form.non_field_errors %}
+          <p><strong>Error:</strong> {{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- form fields -->
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit!" class="btn">
+  </form>
+</div>
 
 <!-- Materialize JS initialization -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all select elements
     var selectEls = document.querySelectorAll('select');
     M.FormSelect.init(selectEls);
   });
 </script>
-
 {% endblock %}

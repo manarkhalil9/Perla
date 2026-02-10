@@ -225,16 +225,12 @@ table {
     margin-bottom: 20px;
 }
 
-input, select, textarea {
-    border-bottom: 1px solid var(--border-beige) !important;
-}
-
 /* ================= DASHBOARD LAYOUT ================= */
 .perla-dashboard {
     display: flex;
     flex-direction: column;
     gap: 28px;
-    background: linear-gradient(to bottom, #FCF9F6, #FDFBF9); /* soft pearl glow */
+    background: linear-gradient(to bottom, #FCF9F6, #FDFBF9);
     padding: 20px 15px;
     border-radius: 16px;
 }
@@ -442,4 +438,224 @@ input, select, textarea {
 
 .about-card:hover::before {
     background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 70%);
+}
+
+/* ================= FORMS & ADD/EDIT VISION + TASK ================= */
+.add-edit-container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.add-edit-container form {
+    background: #fffdfa;
+    padding: 30px 25px;
+    border-radius: 18px;
+    border: 1px solid var(--border-beige);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+
+.add-edit-container form::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), transparent 70%);
+    transform: rotate(25deg);
+    pointer-events: none;
+}
+
+.add-edit-container form:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(0,0,0,0.12);
+}
+
+.add-edit-container h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--soft-olive);
+    text-align: center;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.add-edit-container h1::before {
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+}
+
+.add-edit-container input[type="text"],
+.add-edit-container input[type="file"],
+.add-edit-container input[type="email"],
+.add-edit-container textarea,
+.add-edit-container select {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border-beige);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.add-edit-container input:focus,
+.add-edit-container textarea:focus,
+.add-edit-container select:focus {
+    outline: none;
+    border-color: var(--soft-olive);
+    box-shadow: 0 0 6px rgba(94,108,93,0.3);
+}
+
+.add-edit-container input[type="submit"], 
+.add-edit-container .btn {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: lowercase;
+    border: 1px solid var(--soft-olive);
+    background: transparent;
+    color: var(--soft-olive);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-edit-container input[type="submit"]:hover, 
+.add-edit-container .btn:hover {
+    background-color: var(--soft-olive);
+    color: white;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.add-edit-container a.btn.grey {
+    background: #E3D9D1;
+    color: var(--text-earth);
+    border: none;
+    margin-top: 15px;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 18px;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.add-edit-container a.btn.grey:hover {
+    background: var(--soft-olive);
+    color: white;
+}
+
+/* ================= ERROR MESSAGES ================= */
+.card-panel.red {
+    background: #ffe8e8;
+    border-left: 4px solid #e06666;
+    color: #a94442;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+}
+
+/* ================= FORM LABELS ================= */
+label {
+    font-weight: 500;
+    color: var(--soft-olive);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* ================= OPTIONAL TEXTAREA STYLING ================= */
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ================= FILE INPUT CUSTOMIZATION ================= */
+input[type="file"] {
+    padding: 6px 10px;
+}
+
+/* ================= SELECT STYLING ================= */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fffdfa;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-beige);
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+}
+
+/* ================= Todo Form Styling ================= */
+.add-edit-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #FCF9F6; /* pearl-white */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.add-edit-container h4, .add-edit-container h5 {
+  text-align: center;
+  color: #606C5D; /* soft-olive */
+  margin-bottom: 25px;
+}
+
+.add-edit-container .input-field {
+  margin-bottom: 20px;
+}
+
+.add-edit-container label {
+  font-weight: 500;
+  color: #4A443F; /* text-earth */
+}
+
+.add-edit-container input[type="text"],
+.add-edit-container input[type="date"] {
+  border: 1px solid #E3D9D1; /* border-beige */
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.add-edit-container button.btn {
+  background: #94A684; /* sage-olive */
+  color: white;
+  width: 48%;
+  margin-right: 4%;
+  border-radius: 8px;
+}
+
+.add-edit-container button.back-btn {
+  background: #CFAEA5; /* soft pinkish */
+  width: 48%;
+}
+
+.add-edit-container button:hover {
+  opacity: 0.9;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #4A443F;
+  margin-bottom: 15px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-right: 10px;
 }

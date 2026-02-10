@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h5>Edit Task</h5>
+<h5>Edit intention</h5>
 
 <form method="POST">
   {% csrf_token %}
@@ -38,7 +38,7 @@
 
   <!-- Button -->
   <button type="submit" class="btn">Update</button>
-  <button type="submit" class="{% url 'home'%}">Back to Home</button>
+  <button type="submit" class="{% url 'home'%}">Back</button>
 </form>
 
 <!-- Materialize JS initialization -->

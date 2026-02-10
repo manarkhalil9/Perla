@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Edit Task</h1>
+<div class="add-edit-container">
+  
+  <!-- Back button -->
+  <a href="{% url 'vision_detail' vision.id %}" class="btn grey back-btn">← Back</a>
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="Save">
-</form>
+  <h1>Edit Task</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn" value="Save">
+  </form>
+</div>
 
 <!-- Materialize select init -->
 <script>

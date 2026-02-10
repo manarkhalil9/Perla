@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h4>Add Task</h4>
+<h4>Add Intention</h4>
 
 <form method="post">
   {% csrf_token %}
@@ -26,7 +26,11 @@
     </label>
   </p>
 
-  <button type="submit" class="btn">Save</button>
+    <!-- Buttons -->
+    <div class="form-buttons">
+      <button type="submit" class="btn teal">Save</button>
+      <a href="{% url 'home' %}" class="btn grey">Back</a>
+    </div>
 </form>
 
 <!-- Materialize JS initialization -->

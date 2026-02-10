@@ -127,6 +127,13 @@ class VisionCreate(LoginRequiredMixin, CreateView):
 class VisionUpdate(LoginRequiredMixin, UpdateView):
     model = Vision
     fields = ['name', 'description', 'target_month', 'image']
+    template_name = 'main_app/vision_form.html'
+
+    def form_valid(self, form):
+        # Save the form first
+        self.object = form.save()
+        # Redirect to the vision detail page using redirect
+        return redirect('vision_detail', vision_id=self.object.id)
 
 # delete vision
 class VisionDelete(LoginRequiredMixin, DeleteView):
@@ -156,6 +163,17 @@ def task_create(request, vision_id):
 class VisionTaskUpdate(LoginRequiredMixin, UpdateView):
     model = VisionTask
     fields = ['title', 'month']
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['vision'] = self.object.vision  # pass the related vision
+        return context
+
+    def form_valid(self, form):
+        # Save the task first
+        self.object = form.save()
+        # Redirect to the related vision detail page
+        return redirect('vision_detail', vision_id=self.object.vision.id)
 
 # delete vision task
 class VisionTaskDelete(LoginRequiredMixin, DeleteView):
