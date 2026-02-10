@@ -2,128 +2,177 @@
 {% load static %}
 
 {% block content %}
-<div class="perla-container">
 
-  <div class="quote-section">
+<div class="perla-dashboard">
+
+  <!-- ================= QUOTE CARD ================= -->
+  <div class="perla-card quote-card center-align">
     <p class="quote-text">"{{ quote.text }}"</p>
     <p class="quote-author">— {{ quote.author }}</p>
   </div>
 
-  <h5 class="welcome-text">A soft space for steady growth.</h5>
-  <hr class="perla-divider">
 
-  <div class="board-container">
 
-    <div class="vision-board">
+  <!-- ================= BOARD + TODO ROW ================= -->
+  <div class="dashboard-row">
 
-      <h5 class="board-title">My Vision Board</h5>
+    <!-- ========= LEFT : VISION BOARD ========= -->
+    <div class="perla-card vision-card">
 
-      {% for vision in visions %}
-        <a href="{% url 'select_vision' vision.id %}" class="vision-link">
-          <div class="vision-polaroid">
-            {% if vision.image %}
-              <div class="polaroid-image-container">
-                <img src="{% static vision.image|cut:'main_app/static/' %}" class="polaroid-img">
+      <h5 class="section-title">Vision Board</h5>
+
+      <div class="vision-grid">
+
+        {% for vision in visions %}
+          <a href="{% url 'select_vision' vision.id %}" class="vision-link">
+
+            <div class="vision-polaroid">
+
+              {% if vision.image %}
+                <div class="polaroid-image-container">
+                  <img src="{% static vision.image|cut:'main_app/static/' %}" class="polaroid-img">
+                </div>
+              {% endif %}
+
+              <div class="polaroid-caption">
+                <span class="vision-name">{{ vision.name }}</span>
+                <small class="vision-date">{{ vision.get_target_month_display }}</small>
               </div>
-            {% endif %}
-            <div class="polaroid-caption">
-              <span class="vision-name">{{ vision.name }}</span>
-              <small class="vision-date">{{ vision.get_target_month_display }}</small>
-            </div>
-          </div>
-        </a>
-      {% endfor %}
 
+            </div>
+
+          </a>
+        {% endfor %}
+
+      </div>
     </div>
 
-    <div class="todo-sidebar">
 
-       <h5 class="todo-title">Today's Intentions</h5>
-       <ul class="todo-collection">
+
+    <!-- ========= RIGHT : TODO PANEL ========= -->
+    <div class="perla-card todo-card">
+
+      <h5 class="section-title">Today's Intentions</h5>
+
+      <!-- ACTIVE -->
+      <ul class="todo-collection">
         {% for todo in active_todos %}
         <li class="todo-list-item">
 
           <a href="{% url 'todo_toggle' todo.id %}" class="todo-checkbox">◦</a>
 
-          <a href="{% url 'todo_edit' todo.id %}" class="todo-text">{{ todo.title }}</a>
+          <a href="{% url 'todo_edit' todo.id %}" class="todo-text">
+            {{ todo.title }}
+          </a>
 
           <a href="{% url 'todo_delete' todo.id %}" class="todo-action-icon">✕</a>
 
-            {% if todo.priority == 'high' %}
-             <span class="priority-marker"> ❗ </span>
-             {% endif %}
+          {% if todo.priority == 'high' %}
+            <span class="priority-marker">❗</span>
+          {% endif %}
+
         </li>
         {% empty %}
         <li class="todo-empty-state">No tasks yet. Take a breath.</li>
         {% endfor %}
-       </ul>
+      </ul>
 
-       <h6 class="completed-header">completed</h6>
-       <ul class="todo-collection-done">
+
+      <!-- COMPLETED -->
+      <h6 class="completed-header">completed</h6>
+
+      <ul class="todo-collection-done">
         {% for todo in completed_todos %}
         <li class="todo-list-item-done">
-        <strike>{{ todo.title }}</strike>
 
-        <a href="{% url 'todo_toggle' todo.id %}" class="todo-reactivate">✔</a>
+          <strike>{{ todo.title }}</strike>
 
-        <a href="{% url 'todo_delete' todo.id %}" class="todo-action-icon">✕</a>
+          <a href="{% url 'todo_toggle' todo.id %}" class="todo-reactivate">✔</a>
+
+          <a href="{% url 'todo_delete' todo.id %}" class="todo-action-icon">✕</a>
+
         </li>
-        {% endfor%}
-       </ul>
+        {% endfor %}
+      </ul>
+
 
       <div class="add-todo-container">
-        <a href="{% url 'todo_add_form' %}" class="btn-perla-outline"> + Add New </a>
+        <a href="{% url 'todo_add_form' %}" class="btn-perla-outline">+ Add New</a>
       </div>
+
     </div>
   </div>
 
-  <hr class="perla-divider">
 
-{% if selected_vision and timeline %}
-  <div class="timeline-container">
-    <h5 class="timeline-header">The Path to {{ selected_vision.name }}</h5>
 
-    <div class="timeline-row">
-      {% for month in timeline %}
+  <!-- ================= TIMELINE CARD ================= -->
+  <div class="perla-card timeline-card">
+
+    {% if selected_vision and timeline %}
+
+      <h5 class="section-title">
+        The Path to {{ selected_vision.name }}
+      </h5>
+
+      <!-- PROGRESS ROW -->
+      <div class="timeline-row">
+        {% for month in timeline %}
         <div class="timeline-month">
+
           {% if month.tasks.exists %}
-          <div class="circle {{ month.circle_status }}"></div>
+            <div class="circle {{ month.circle_status }}"></div>
             <div class="month-label">{{ month.month }}</div>
           {% else %}
-          <div class="circle empty"></div>
+            <div class="circle empty"></div>
             <div class="month-label-empty">{{ month.month }}</div>
           {% endif %}
+
         </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
 
-    <h6 class="action-items-header">Action Items</h6>
 
-    {% for month in timeline %}
-      {% if month.tasks.exists %}
-      <div class="month-task-group">
+
+      <!-- ACTION ITEMS -->
+      <h6 class="action-items-header">Action Items</h6>
+
+      {% for month in timeline %}
+        {% if month.tasks.exists %}
+        <div class="month-task-group">
+
           <span class="month-tag">{{ month.month }}</span>
+
           {% for task in month.tasks %}
-            <div class="task-entry">
-              <span class="task-title">{{ task.title }}</span>
-              <span class="task-actions">
-                {% if not task.is_added %}
-                  <a href="{% url 'todo_from_task' task.id %}" class="task-add-link">+ Add to Intentions</a>
-                {% endif %}
-              </span>
-            </div>
+          <div class="task-entry">
+
+            <span class="task-title">{{ task.title }}</span>
+
+            <span class="task-actions">
+              {% if not task.is_added %}
+                <a href="{% url 'todo_from_task' task.id %}" class="task-add-link">
+                  + Add to Intentions
+                </a>
+              {% endif %}
+            </span>
+
+          </div>
           {% endfor %}
+
         </div>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+      {% endfor %}
+
+    {% else %}
+
+      <div class="timeline-empty-container center-align">
+        <h5>Where is your path leading?</h5>
+        <p>Select a vision from your board to see the journey.</p>
+      </div>
+
+    {% endif %}
 
   </div>
-{% else %}
-  <div class="timeline-empty-container">
-    <h5 class="timeline-placeholder-text">Where is your path leading?<h5>
-    <p class="timeline-subtext">Select a vision from your board to see the journey.</p>
-  </div>
-{% endif %}
 
 </div>
+
 {% endblock %}

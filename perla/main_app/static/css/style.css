@@ -15,6 +15,13 @@ body {
     color: var(--text-earth);
     font-family: 'Georgia', serif;
     margin: 0;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .perla-container {
@@ -50,6 +57,7 @@ nav ul li a,
 footer.page-footer {
     padding: 20px 0 !important;
     margin-top: 40px;
+    text-align: right;
 }
 
 .perla-rights {
@@ -92,26 +100,6 @@ button[type="submit"]:hover,
 }
 
 /* ================= VISION BOARD ================= */
-.board-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.vision-board {
-    flex: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-    gap: 20px;
-    background: var(--polaroid-white);
-    padding: 25px;
-    border: 1px solid var(--border-beige);
-    border-radius: 4px;
-    aspect-ratio: 1 / 1; 
-    overflow-y: auto;
-}
-
 .vision-polaroid {
     background: var(--polaroid-white);
     padding: 8px;
@@ -142,15 +130,6 @@ button[type="submit"]:hover,
 }
 
 /* ================= TODO SIDEBAR ================= */
-.todo-sidebar {
-    flex: 1;
-    background: #FFFBF7;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid var(--border-beige);
-    border-left: 5px solid var(--soft-olive);
-}
-
 .todo-text, 
 .todo-collection li a, 
 .todo-collection-done li strike {
@@ -236,22 +215,58 @@ input, select, textarea {
     border-bottom: 1px solid var(--border-beige) !important;
 }
 
-body {
+/* ================= DASHBOARD LAYOUT ================= */
+.perla-dashboard {
     display: flex;
-    min-height: 100vh;
     flex-direction: column;
-  }
+    gap: 28px;
+}
 
-  main {
-    flex: 1 0 auto;
-  }
+.perla-card {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border-beige);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+    padding: 25px;
+}
 
-  footer.page-footer {
-    padding-top: 0;
-    text-align: right;
-  }
+.dashboard-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 28px;
+}
 
-  .flex-continer{
+.quote-card {
+    padding: 22px;
+}
+
+.vision-card {
+    min-height: 360px;
+}
+
+.vision-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 20px;
+}
+
+.todo-card {
+    background: #FFFBF7;
+    border-left: 6px solid var(--soft-olive);
+}
+
+.timeline-card {
+    padding: 40px;
+}
+
+.section-title {
+    color: var(--soft-olive);
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* ================= FLEX HELPERS ================= */
+.flex-continer{
     display: flex;
     justify-content: space-between;
-  }
+}
