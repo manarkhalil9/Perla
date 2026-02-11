@@ -59,7 +59,7 @@
         {% for todo in active_todos %}
         <li class="todo-list-item">
 
-          <a href="{% url 'todo_toggle' todo.id %}" class="todo-checkbox">◦</a>
+          <a href="{% url 'todo_toggle' todo.id %}" class="todo-checkbox"></a>
 
           <a href="{% url 'todo_edit' todo.id %}" class="todo-text">
             {{ todo.title }}
@@ -85,9 +85,9 @@
         {% for todo in completed_todos %}
         <li class="todo-list-item-done">
 
-          <strike>{{ todo.title }}</strike>
+          <a href="{% url 'todo_toggle' todo.id %}" class="todo-reactivate"></a>
 
-          <a href="{% url 'todo_toggle' todo.id %}" class="todo-reactivate">✔</a>
+          <span class="todo-text-done">{{ todo.title }}</span>
 
           <a href="{% url 'todo_delete' todo.id %}" class="todo-action-icon">✕</a>
 
@@ -102,7 +102,6 @@
 
     </div>
   </div>
-
 
 
   <!-- ================= TIMELINE CARD ================= -->

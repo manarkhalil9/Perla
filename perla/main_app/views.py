@@ -15,13 +15,32 @@ from datetime import date
 # home
 @login_required
 def home(request, vision_id=None):
+
+    # get todays date
+    today = date.today()
+
+    # chack session for sorted quote
+    sorted_date = request.session.get('quote_date')
+    sorted_quote = request.session.get('daily_quote')
+
+    # if there is no save date yet or the saved date is not today
+    if sorted_date != str(today):
+        # if new day generate new quote
+        # generate new random quote
+        quote_data = get_quote()
+        # save new quote, and todays date inside the session, so it wont changed again today
+        request.session['daily_quote'] = quote_data
+        request.session['quote_date'] = str(today)
+    else:
+        # if same day reuse sorted quote
+        quote_data = sorted_quote
+
     todos = TodoItem.objects.filter(user=request.user)
 
     active_todos = todos.filter(is_done=False).order_by('date')
     completed_todos = todos.filter(is_done=True).order_by('-date')
 
     visions = Vision.objects.filter(user=request.user).prefetch_related('visiontask_set')
-    quote_data = get_quote()
 
     selected_vision = None
     timeline = []
