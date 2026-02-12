@@ -2,7 +2,7 @@ databases:
   - name: perladb
     plan: free
     databaseName: perla
-    user: postgres
+    user: perlauser
 
 services:
   - type: web
