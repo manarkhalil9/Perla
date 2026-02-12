@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'perla.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+        default='postgresql://postgres:12345678@localhost:5432/perla',
         conn_max_age=600
     )
 }

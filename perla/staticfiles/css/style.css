@@ -115,21 +115,6 @@ button[type="submit"]:hover,
     text-transform: none;
 }
 
-/* Kill Materialize column sizing ONLY here */
-.row > .col {
-    width: 100% !important;
-    max-width: none !important;
-    flex: none !important;
-}
-
-/* Proper grid layout */
-.row {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
-    align-items: start;
-}
-
 /* ================= VISION BOARD ================= */
 .vision-polaroid {
     background: var(--polaroid-white);
