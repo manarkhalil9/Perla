@@ -1,7 +1,7 @@
 databases:
   - name: perladb
     plan: free
-    databaseName: perla
+    databaseName: perla_cpdw
     user: perlauser
 
 services:
