@@ -29,15 +29,16 @@
             <div class="vision-polaroid">
 
               {% if vision.image %}
-                <div class="polaroid-image-container">
-                  <img src="{% static vision.image|cut:'main_app/static/' %}" class="polaroid-img">
-                </div>
-              {% endif %}
-
+               <div class="polaroid-image-container">
+                <img src="{% static vision.image|cut:'main_app/static/' %}" class="polaroid-img">
+               </div>
+              {% else %}
               <div class="polaroid-caption">
-                <span class="vision-name">{{ vision.name }}</span>
-                <small class="vision-date">{{ vision.get_target_month_display }}</small>
-              </div>
+                <p class="vision-description">
+                  {{ vision.description }}
+                </p>
+                 </div>
+                {% endif %}
 
             </div>
 
@@ -46,8 +47,6 @@
 
       </div>
     </div>
-
-
 
     <!-- ========= RIGHT : TODO PANEL ========= -->
     <div class="perla-card todo-card">
@@ -110,7 +109,7 @@
     {% if selected_vision and timeline %}
 
       <h5 class="section-title">
-        The Path to {{ selected_vision.name }}
+        The Path to {{ selected_vision.name }} - {{ selected_vision.get_target_month_display }}
       </h5>
 
       <!-- PROGRESS ROW -->
