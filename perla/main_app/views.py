@@ -196,7 +196,9 @@ class VisionTaskUpdate(LoginRequiredMixin, UpdateView):
 # delete vision task
 class VisionTaskDelete(LoginRequiredMixin, DeleteView):
     model = VisionTask
-    success_url = '/visions/'
+
+    def get_success_url(self):
+        return redirect('vision_detail', vision_id=self.object.vision.id)
 
 # todo list
 @login_required
