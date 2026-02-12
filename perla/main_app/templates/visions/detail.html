@@ -4,7 +4,8 @@
 {% block content %}
 
 {% if vision %}
-  <h1>{{ vision.name }}</h1>
+<div class="vision-detail-page">
+  <h1 class="detail-title">{{ vision.name }}</h1>
 
   <div class="card">
     <div class="card-content">
@@ -54,6 +55,7 @@
 
 {% else %}
   <p>Vision not found.</p>
+  </div>
 {% endif %}
 
 <!-- Materialize JS initialization -->
