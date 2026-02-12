@@ -1,8 +1,8 @@
 databases:
-  - name: perladata
+  - name: perladb
     plan: free
     databaseName: perla
-    user: perla
+    user: postgres
 
 services:
   - type: web
@@ -10,11 +10,13 @@ services:
     name: perla
     runtime: python
     buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn perla.asgi:application -k uvicorn.workers.UvicornWorker'
+    startCommand: 'python -m gunicorn perla.asgi:application -k uvicorn.workers.UvicornWorker' 
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: perladata
+          name: perladb
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
