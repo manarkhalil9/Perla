@@ -899,3 +899,9 @@ select {
     padding: 14px 10px;
     font-size: 1rem;
 }
+
+.perla-card, .vision-detail-page .card {
+    min-height: 380px; /* slightly taller */
+    padding: 30px;
+}
+

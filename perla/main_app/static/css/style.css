@@ -2,9 +2,9 @@
 :root {
     --pearl-white: #FCF9F6;
     --noody-beige: #F2E8DF;
-    --soft-olive: #606C5D;   
-    --sage-olive: #94A684;
-    --text-earth: #4A443F;
+    --soft-olive: #4A553F;   
+    --sage-olive: #6B826B;
+    --text-earth: #3D3A33;
     --border-beige: #E3D9D1;
     --polaroid-white: #FFFFFF;
 }
@@ -42,6 +42,7 @@ main {
 
 .perla-container {
     padding-bottom: 50px;
+    padding: 60px 20px;
 }
 
 .perla-divider {
@@ -121,13 +122,13 @@ button[type="submit"]:hover,
     flex: none !important;
 }
 
-/* Proper grid layout */
 .row {
     display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 50px;
     align-items: start;
 }
+
 
 /* ================= VISION BOARD ================= */
 .vision-polaroid {
@@ -148,7 +149,6 @@ button[type="submit"]:hover,
 .polaroid-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
     object-position: center;
     border-radius: 10px;
 }
@@ -203,6 +203,10 @@ button[type="submit"]:hover,
     color: #ccc;
     font-size: 0.9rem;
     margin-left: auto;
+}
+
+.todo-text, .vision-date, .card-content small {
+    color: var(--text-earth) !important; /* darker for readability */
 }
 
 /* ================= TIMELINE PROGRESS ================= */
@@ -775,13 +779,19 @@ select {
 
 .card.hoverable {
     width: 100%;
-    min-height: 380px;
+    min-height: 420px;
     border-radius: 24px !important;
     overflow: hidden;
     background: #fffdfa;
     border: 1px solid var(--border-beige);
     box-shadow: 0 10px 28px rgba(0,0,0,0.08);
     transition: transform 0.35s ease, box-shadow 0.35s ease;
+    padding: 30px;
+}
+
+.vision-polaroid {
+    padding: 15px; /* more padding */
+    border-radius: 16px;
 }
 
 .card.hoverable:hover {
