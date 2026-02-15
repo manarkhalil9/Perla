@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'perla.perla.urls'
+ROOT_URLCONF = 'perla.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'perla.perla.wsgi.application'
+WSGI_APPLICATION = 'perla.wsgi.application'
 
 
 # Database
