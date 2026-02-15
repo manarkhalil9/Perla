@@ -87,10 +87,9 @@ WSGI_APPLICATION = 'perla.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:12345678@localhost:5432/perla',
-        conn_max_age=600
+        default=os.environ.get('DATABASE_URL')
     )
-    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
