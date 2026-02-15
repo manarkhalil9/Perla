@@ -28,10 +28,10 @@
 
             <div class="vision-polaroid">
 
-               {% if vision.image %}
-                 <div class="polaroid-image-container">
-                  <img src="{{ vision.image.url }}" class="polaroid-img">
-                </div>
+              {% if vision.image %}
+               <div class="polaroid-image-container">
+                <img src="{% static vision.image|cut:'main_app/static/' %}" class="polaroid-img">
+               </div>
               {% else %}
               <div class="polaroid-caption">
                 <p class="vision-description">
