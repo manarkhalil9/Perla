@@ -923,3 +923,10 @@ select {
     padding: 14px 10px;
     font-size: 1rem;
 }
+
+.user-greet {
+    font-size: 0.9rem;
+    margin-left: 10px;
+    opacity: 0.7;
+    font-weight: normal;
+}

@@ -31,7 +31,13 @@
         </a>
 
         <!-- Logo -->
-        <a href="{% url 'home' %}" class="brand-logo">Perla</a>
+        <a href="/" class="brand-logo">
+            Perla
+            {% if user.is_authenticated %}
+               span class="user-greet">Hello {{ user.username }}!</span>
+            {% endif %}
+        </a>
+
 
         <!-- Desktop Menu -->
         <ul class="right hide-on-med-and-down">
@@ -47,7 +53,6 @@
                 <button type="submit" class="btn-flat">Logout</button>
               </form>
             </li>
-            <li>Hello, {{ user.username }}!</li>
           {% else %}
             <li><a href="{% url 'login' %}">Login</a></li>
             <li><a href="{% url 'signup' %}">Signup</a></li>
