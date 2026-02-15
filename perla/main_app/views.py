@@ -12,6 +12,11 @@ from datetime import date
 # Create your views here.
 
 # home
+def landing(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    return redirect('signup')
+
 @login_required
 def home(request, vision_id=None):
 
@@ -273,7 +278,7 @@ def signup(request):
     if form.is_valid():
       user = form.save()
       login(request, user)
-      return redirect('index')
+      return redirect('home')
     else:
       error_message = 'Invalid signup - try again'
 

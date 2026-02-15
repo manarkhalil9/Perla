@@ -3,7 +3,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'), 
+path('', views.landing, name='landing'),
+path('home/', views.home, name='home'),
+
     # click vision
     path('select_vision/<int:vision_id>/', views.home, name='select_vision'),
 
