@@ -4,7 +4,7 @@ services:
     plan: free
     runtime: python
     buildCommand: ./build.sh
-    startCommand: uvicorn perla.asgi:application --host 0.0.0.0 --port $PORT
+    startCommand: gunicorn perla.asgi:application -k uvicorn.workers.UvicornWorker --chdir /opt/render/project/src
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -14,4 +14,5 @@ services:
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
+
 
