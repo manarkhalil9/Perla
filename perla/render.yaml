@@ -1,17 +1,10 @@
-databases:
-  - name: perladb
-    plan: free
-    databaseName: perla
-    user: perla
-
 services:
   - type: web
-    plan: free
     name: perla
+    plan: free
     runtime: python
-    buildCommand: './build.sh'
-    startCommand: "python -m gunicorn perla.asgi:application -k uvicorn.workers.UvicornWorker"
-
+    buildCommand: ./build.sh
+    startCommand: python -m gunicorn perla.asgi:application -k uvicorn.workers.UvicornWorker
     envVars:
       - key: DATABASE_URL
         fromDatabase:
