@@ -6,6 +6,8 @@ The app combines goal setting, task management, and progress tracking to create 
 
 Perla is designed to make productivity feel peaceful, structured, and achievable.
 
+## Perla in Action: https://perla-tfkw.onrender.com
+
 # ✨ Features
 
 Secure user authentication (Sign up / Login / Logout)
