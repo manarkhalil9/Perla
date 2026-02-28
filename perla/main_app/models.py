@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import date
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 MONTHS = (
@@ -25,7 +26,7 @@ class Vision(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     target_month = models.CharField(max_length=3, choices=MONTHS)
-    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
