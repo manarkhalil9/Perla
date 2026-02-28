@@ -25,7 +25,7 @@ class Vision(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     target_month = models.CharField(max_length=3, choices=MONTHS)
-    image = models.ImageField(upload_to='main_app/static/uploads/', default='', blank=True, null=True)
+    image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

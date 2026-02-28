@@ -11,7 +11,7 @@
           
           {% if vision.image %}
             <div class="card-image">
-              <img src="{% static vision.image|cut:'main_app/static/' %}" alt="{{ vision.name }}">
+              <img src="{{ vision.image.url }}" alt="{{ vision.name }}">
             </div>
           {% endif %}
 
