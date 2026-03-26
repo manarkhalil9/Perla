@@ -12,14 +12,14 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+import dj_database_url # type: ignore
 from dotenv import load_dotenv
 
 # Load .env file
 load_dotenv()
 
 # Cloudinary configuration
-import cloudinary
+import cloudinary # type: ignore
 
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),

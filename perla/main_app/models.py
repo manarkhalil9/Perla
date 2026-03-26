@@ -3,8 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from datetime import date
-from cloudinary.models import CloudinaryField
-
+from cloudinary.models import CloudinaryField # type: ignore
 
 # Create your models here.
 MONTHS = (
