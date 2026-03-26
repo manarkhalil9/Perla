@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from datetime import date
 from cloudinary.models import CloudinaryField
 
+
 # Create your models here.
 MONTHS = (
     ('JAN', 'January'),
@@ -26,7 +27,7 @@ class Vision(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     target_month = models.CharField(max_length=3, choices=MONTHS)
-    image = CloudinaryField('image', blank=True, null=True)
+    image = CloudinaryField('image')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
